@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row">
         <div class="col-12 col-md-3 pr-4 dont-move">
-            <a href="/"><h2><img class="img-fluid" width="60" src="{% static 'blog/logo.png' %}"> <span style="color: #ff6600;">City</span><span style="color: #93a603;">Sends</span></h2></a><br>
+            <a href="/"> <h2><img class="img-fluid" width="60" src="{% static 'blog/logo.png' %}">BlogRoom</h2></a><br>
             <div class="profile-section">
             <h3 class="white-important p-2">
                 Profile
@@ -92,8 +92,8 @@
             <div class="d-flex">
                 {% if user_profile is None %}
                 <div style="margin-left: auto; margin-right:auto">
-                    <a style="color: #fff !important;" class="btn btn-sm btn-outline-primary mb-4 mr-3 " href="{% url 'post-create' %}">
-                        New Post
+                    <a class="btn btn-sm btn-outline-primary mb-4 mr-3 " href="{% url 'post-create' %}">
+                        Tweet
                     </a>
                 </div>
                 {% endif %}
@@ -119,7 +119,9 @@
         <div class="col-12 col-md-6 scrollable" >
             <div class="full-width row">
                 <div class="col-6">
-                    <h3 class="white-important mb-3">Posts</h3>
+                    <h3 class="white-important mb-3">
+                        Tweets
+                    </h3>
                 </div>
                  <div class="col-6 no-padding">
                     <h6
@@ -169,11 +171,7 @@
                             {{ post.content }}
                         </p>
                     </a>
-                    
-                    {% if post.header_image %}
-                        <img src="{{ post.header_image.url }}" width="100%z" height="100%"></img>
-                    {% endif %}
-                    <br><br>
+
                         <div class="row">
                             <div class="col-6" style="display: flex;">
                                 <small style="opacity: 0.4;">
@@ -243,16 +241,14 @@
             </div>
         </div>
         <div class="col-12 col-md-3 dont-move">
-<!--            <div id="busqueda">
-                <form action="{% url 'search' %}" method="post">{% csrf_token %}
+            <form action="{% url 'search' %}" method="post">{% csrf_token %}
                 <div class="search-container">
                     <div class="search">
-                    <input id="searcher" required name="search" type="text" id="zip-code-input" placeholder="Search">
+                    <input required name="search" type="text" id="zip-code-input" placeholder="Search Twitter">
                     <button type="submit" style="border:0; background: transparent;"><i class="fa fa-search"></i> </button> </a>
                 </form>
-            </div>
               </div>
-            </div> -->
+            </div>
             <h3 class="white-important mb-3 mt-4"> Trends </h3>
 
                 {%  if user_profile is None %}
@@ -289,10 +285,12 @@
 
                 </article>
                 {% endif %}
-                <p><a class="desct" href="">Terms</a>,
-<a class="desct" href="">Privacy policy</a>,
-<a class="desct" href="">Cookies</a>,
-<a class="desct" href="">More</a>, 2021 CitySends</p>
+                <p><a href="">Terms</a>,
+<a href="">Privacy policy</a>,
+<a href="">Cookies</a>,
+<a href="">Ads info</a>,
+<a href="">More</a>
+© 2020 Twitter, Inc.</p>
 
         </div>
     </div>

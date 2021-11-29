@@ -1,1 +1,1 @@
-web: gunicorn CCMS.wsgi --log-file -
+web: gunicorn Django-Twitter-Clone.wsgi --log-file -
