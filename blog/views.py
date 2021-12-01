@@ -16,7 +16,12 @@ from rest_framework.decorators import api_view
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
-
+from django import forms
+#=================================================================================================================>
+import pandas as pd
+import geopandas as gpd
+from shapely import wkt
+from shapely.geometry import Polygon, Point
 
 def is_users(post_user, logged_user):
     return post_user == logged_user
@@ -139,7 +144,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['content']
+    fields = ['content', 'latitude', 'longitude', 'header_image']
     template_name = 'blog/post_new.html'
     success_url = '/'
 
@@ -155,7 +160,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['content']
+    fields = ['content', 'latitude', 'longitude', 'header_image']
     template_name = 'blog/post_new.html'
     success_url = '/'
 
@@ -312,12 +317,51 @@ def postpreference(request, postid, userpreference):
 
                 return redirect('blog-home')
 
+#busqueda de posts ==================================================================================>>
+@login_required
+def DataExtraction(request):
 
+    contenido = request.POST.get('busqueda')
+    usuario =  request.POST.get('username')
+    desde = request.POST.get('date1')
+    hasta = request.POST.get('date2')
+    
+    if contenido==None and usuario==None and desde==None and hasta==None:
+        return render(request,'blog/practise.html',)
+    
+    #cuando solo se llena el contenido
+    elif contenido != '' and usuario == '' and desde == '' and hasta == '':
+        obj = Post.objects.filter(content__contains=contenido)
+        context = {
+            'encontrar': obj,
+        }
+        return render(request,'blog/practise.html', context)
 
-def about(request):
-    return render(request,'blog/about.html',)
+    #cuando se llenan el contenido y las fechas unicamente
+    elif contenido != '' and usuario == '' and desde != '' and hasta != '':
+        obj = Post.objects.filter(content__contains=contenido, date_posted__range=[desde, hasta],)
+        context = {
+            'encontrar': obj,
+        }
+        return render(request,'blog/practise.html', context) 
 
+    #cuando se llenan el contenido y el usuario unicamente
+    elif contenido != '' and usuario != '' and desde == '' and hasta == '':
+        obj = Post.objects.filter(content__contains=contenido, author__username__icontains=usuario,)
+        context = {
+            'encontrar': obj,
+        }
+        return render(request,'blog/practise.html', context)        
+        
+    #cuando se llenan todos los campos
+    elif contenido != '' and usuario != '' and desde != '' and hasta != '':
+        obj = Post.objects.filter(content__contains=contenido, author__username__icontains=usuario, date_posted__range=[desde, hasta],)
+        context = {
+            'encontrar': obj,
+        }
+        return render(request,'blog/practise.html', context)
 
+#fin de busqueda de posts ==================================================================================<<
 
 class UserViewSet(viewsets.ModelViewSet):
     """
