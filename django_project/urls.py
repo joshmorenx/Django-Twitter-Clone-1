@@ -54,7 +54,11 @@ from users import views as users_views
 from django.views.static import serve
 from django.conf.urls import url
 
+"""import debug_toolbar
+from django.urls import include, path
+"""
 urlpatterns = [
+    #path('__debug__/', include(debug_toolbar.urls)),
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView
          .as_view(template_name='users/login.html'), name='login'),  # class based views (

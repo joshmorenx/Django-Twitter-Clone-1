@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*n*f0zqlu+cgn&m*sd3^qkz9b=nw6db(tfo$156o9ag-%2f_eq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','citysends.herokuapp.com']
 
@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #"debug_toolbar",
     'rest_framework',
 ]
 
 MIDDLEWARE = [
+    #"debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -146,3 +148,5 @@ LOGIN_URL = 'login'
 DATETIME_FORMAT = 'd-m-Y H:i:s'
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 150242880
+
+INTERNAL_IPS = "127.0.0.1"

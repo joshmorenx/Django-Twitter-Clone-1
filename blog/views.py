@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from blog.models import Post, Comment, Preference
+from blog.models import Post, Comment, Preference, Reflejado
 from users.models import Follow, Profile
 import sys
 from django.contrib.auth.models import User
@@ -22,6 +22,22 @@ import pandas as pd
 import geopandas as gpd
 from shapely import wkt
 from shapely.geometry import Polygon, Point
+
+df = pd.read_csv('poligonos_mx.csv') #Se lee el csv como un dataframe normal y después se convierte a geodataframe
+df['geometry'] = df['geometry'].apply(wkt.loads)
+gdf = gpd.GeoDataFrame(df, crs='epsg:4326')
+
+def dime_estado(lon, lat):
+    estado = 'Fuera de México'
+    band = 0
+    point = Point(lon, lat)
+    for index, row in gdf.iterrows():
+        poligon = gdf['geometry'][index]
+        if poligon.contains(point):
+            estado = gdf['estado'][index]
+            band = 1
+            break
+    return estado    
 
 def is_users(post_user, logged_user):
     return post_user == logged_user
@@ -150,6 +166,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.estado = dime_estado(form.instance.longitude, form.instance.latitude)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -166,6 +183,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.estado = dime_estado(form.instance.longitude, form.instance.latitude)
         return super().form_valid(form)
 
     def test_func(self):
