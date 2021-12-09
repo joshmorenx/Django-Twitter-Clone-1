@@ -1,4 +1,4 @@
-# Django Twitter Clone by Redian Marku
+# Django Twitter Clone modified by Joshua Emmanuel Aranda Moreno
 
 This is a fork, modified by Joshua Emmanuel Aranda Moreno,
 in purpose to "data extraction" and also "data mining" where the user
