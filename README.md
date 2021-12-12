@@ -1,10 +1,15 @@
-# Django Twitter Clone by Redian Marku
+# Django Twitter Clone modified by Joshua Emmanuel Aranda Moreno
 
-Fully functional Django App that looks ecxatly like real Twitter.
-
-Demo Image:
-![](TwitterDemo.png)
-
+This is a fork, modified by Joshua Emmanuel Aranda Moreno,
+in purpose to "data extraction" and also "data mining" where the user
+has the posibility to post with latitude and longitude, there's an algorithm
+that converts the dataframe made by the post published by the user, that takes
+both latitude and longitude, then classifies the dataframe by country state
+in this case i did it for Mexico only, this is possible after i have collected the Mexico's country sates and converted them into polygons,
+the algorithm calculates in which position the latitude and longitude it is, 
+in fact, the algorithm converts the previous dataframe without the Mexico's country states prefix
+to a new dataframe that contains the full previous dataframa but with containing the prefix of the
+Mexico's country states according the lat and lon
 ## Setup
 
 1. Git Clone the project with: ```git clone https://github.com/redianmarku/Django-Twitter-Clone.git```.
@@ -44,7 +49,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Please Subscribe my YouTube Channel: <a href="https://www.youtube.com/channel/UCO5WiowKFnEw17AOk008WOQ" target="_blank">Top Notch Programmer</a>.
-
-# Donate
-[![paypal](https://mk0mightycausebxdggx.kinstacdn.com/wp-content/uploads/2019/06/paypal-donate-button-high-quality-png.png)](https://www.paypal.me/redidev)
