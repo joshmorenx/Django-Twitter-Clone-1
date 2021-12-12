@@ -343,10 +343,18 @@ def DataExtraction(request):
     usuario =  request.POST.get('username')
     desde = request.POST.get('date1')
     hasta = request.POST.get('date2')
+    prefijo = request.POST.get('estado')
     
     if contenido==None and usuario==None and desde==None and hasta==None:
         return render(request,'blog/practise.html',)
     
+    elif prefijo != '' and usuario == '' and desde == '' and hasta == '':
+        obj = Post.objects.filter(estado__contains=prefijo)
+        context = {
+            'encontrar': obj,
+        }
+        return render(request,'blog/practise.html', context)
+
     #cuando solo se llena el contenido
     elif contenido != '' and usuario == '' and desde == '' and hasta == '':
         obj = Post.objects.filter(content__contains=contenido)
@@ -378,6 +386,21 @@ def DataExtraction(request):
             'encontrar': obj,
         }
         return render(request,'blog/practise.html', context)
+    
+    #cuando se llena el solo el campo usuario
+    elif contenido == '' and usuario != '' and desde == '' and hasta == '':
+        obj = Post.objects.filter(author__username__icontains=usuario,)
+        context = {
+            'encontrar': obj,
+        }
+        return render(request,'blog/practise.html', context)
+        
+    else:
+        nada = 'Ingrese algún caractér en el cuadro de busquedas'
+        also_nada = {
+            'fnd': nada,
+        }
+        return render(request,'blog/practise.html', also_nada)
 
 #fin de busqueda de posts ==================================================================================<<
 
