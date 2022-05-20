@@ -165,8 +165,32 @@
                     <a
                             style="color: rgba(255, 255, 255, 0.5) !important;"
                             href="{% url 'post-detail' post.id %}">
-                        <p class="mb-4">
-                            {{ post.content }}
+                        <p id="curitiba" class="mb-4">
+                            <script>
+                                var oopdate = '{{ post.content | urlize }}'
+                                var arreglo = []
+                                arreglo = oopdate.split(' ')
+                                arrobatizer = () => {
+                                    for(i=0;i<arreglo.length;i++){
+                                        if(arreglo[i].includes('@')){
+                                            arreglo[i] = arreglo[i].replace(arreglo[i],'<a href="user/'+arreglo[i].replace('\@','')+'">'+arreglo[i]+'</a>')
+                                            // document.write('<a href="user/'+item.replace('\@','')+'">'+item+'</a>')
+                                        }
+                                    }
+                                    return document.write(arreglo.join(' '))
+                                }
+                                
+                                arrobatizer()
+                                
+                                // arrobatizer = () => {
+                                //     if(oopdate.includes('@')){
+                                //         document.write(oopdate)
+                                //     }
+                                // }
+                                // arrobatizer()
+                            </script>
+                            
+                            <!-- {{ post.content | urlize }} -->
                         </p>
                     </a>
                     

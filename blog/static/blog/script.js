@@ -1,11 +1,11 @@
-var objeto = {'background-color':'rgb(255 240 240','color':'black','font-family':'Ubuntu'}
-var botones = {'color':'black !important','width':'75%', 'padding-left':'15%'}
-var secciones = {'border':'1px solid gray','color':'black'}
-var algunosDivs = {'width':'100%','border':'1px solid gray','border-radius':'10rem','background-color':'white'}
-var sticky = {'overflow':'hidden','background-color':'#333','position':'-webkit-sticky','z-index':'100','position':'sticky','top':'0px'}
+let objeto = {'background-color':'rgb(255 240 240','color':'black','font-family':'Ubuntu'}
+let botones = {'color':'black !important','width':'75%', 'padding-left':'15%'}
+let secciones = {'border':'1px solid gray','color':'black'}
+let algunosDivs = {'width':'100%','border':'1px solid gray','border-radius':'10rem','background-color':'white'}
+let sticky = {'overflow':'hidden','background-color':'#333','position':'-webkit-sticky','z-index':'100','position':'sticky','top':'0px'}
 
-var src = document.querySelector('#busqueda')
-var nav = document.body.querySelector('.navbar').appendChild(src)
+let src = document.querySelector('#busqueda')
+let nav = document.body.querySelector('.ankha').appendChild(src)
 $('.hovered-tweet a').css('color','black')
 $('label').css('color','white')
 $('body, .search').css(objeto)

@@ -24,12 +24,23 @@
             <div class="navbar-nav mr-auto pl-2">
               <a class="nav-item nav-link casa" href="{% url 'blog-home' %}"><h3>Home</h3></a>
             </div>
+            <div class="ankha"></div>
                         <div class="navbar-nav pr-2">
                 {% if user.is_authenticated %}
+                    <style>
+                      .search-container{
+                        display:s;
+                      }
+                    </style>
                     <a class="nav-item nav-link" href="{% url 'post-create' %}">Create a Post</a>
                     <a class="nav-item nav-link" href="{% url 'profile' %}">Settings</a>
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                 {% else %}
+                    <style>
+                      .search-container{
+                        display:none;
+                      }
+                    </style>
                     <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                     <a class="nav-item nav-link" href="{% url 'register-users' %}">Register</a>
                 {% endif %}
