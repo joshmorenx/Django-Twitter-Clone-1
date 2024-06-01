@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Django Twitter Clone modified by Joshua Emmanuel Aranda Moreno
 
 This is a fork, modified by Joshua Emmanuel Aranda Moreno,
@@ -49,3 +50,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+=======
+# Django Twitter Clone modded by Joshmorenx
+
+Fully functional Django App that looks nice
+>>>>>>> f498ace01ec768b87ce6b1431f143f7bd5e52bc8
