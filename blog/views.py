@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from blog.models import Post, Comment, Preference, Reflejado
+from blog.models import Post, Comment, Preference, Reflejado, Hashtags
 from users.models import Follow, Profile
 import sys
 from django.contrib.auth.models import User
@@ -19,6 +19,7 @@ from rest_framework import status
 from django import forms
 #=================================================================================================================>
 import pandas as pd
+import re
 import geopandas as gpd
 from shapely import wkt
 from shapely.geometry import Polygon, Point
@@ -37,7 +38,7 @@ def dime_estado(lon, lat):
             estado = gdf['estado'][index]
             band = 1
             break
-    return estado    
+    return estado
 
 def is_users(post_user, logged_user):
     return post_user == logged_user
@@ -335,72 +336,136 @@ def postpreference(request, postid, userpreference):
 
                 return redirect('blog-home')
 
+# def traeHash():
+#     for i in Post.objects.all():
+#         publs = (str(i))
+#         text = publs
+#         hashes = re.findall('#(\w+)',text)
+#         if hashes:
+#             print(hashes)
+
+# global hashes
+
+def getHashTags(request):
+    obj = 'piwipary'
+    context = {
+            'encontrar': obj,
+        }
+    return render(request,'blog/hashtags.html',context)
+    
+    # content = request.POST.get('busqueda')
+    # if content == None:
+    #     obj = 'si'
+    #     context = {
+    #         "encontrar":obj,
+    #     }
+    #     return render(request,'blog/hashtags.html',context)
+    # elif content != '':
+    #     obj = Post.objects.filter(content__contains=content)
+    #     context = {
+    #         "encontrar":obj,
+    #     }
+    #     return render(request,'blog/hashtags.html',context)
+    # else:
+    #     nada = 'Ingrese algún caractér en el cuadro de busquedas'
+    #     also_nada = {
+    #         'fnd': nada,
+    #     }
+    #     return render(request,'blog/hashtags.html', also_nada)
+
 #busqueda de posts ==================================================================================>>
 @login_required
 def DataExtraction(request):
 
-    contenido = request.POST.get('busqueda')
-    usuario =  request.POST.get('username')
-    desde = request.POST.get('date1')
-    hasta = request.POST.get('date2')
-    prefijo = request.POST.get('estado')
+    # contenido = request.POST.get('busqueda')
+    # usuario =  request.POST.get('username')
+    # desde = request.POST.get('date1')
+    # hasta = request.POST.get('date2')
+    # prefijo = request.POST.get('estado')
+
+    contenido = request.POST.get('sre')
+    usuario =  request.POST.get('usr')
+    desde = request.POST.get('from')
+    hasta = request.POST.get('to')
+    prefijo = request.POST.get('states')
     
+    states = gdf['estado']
+    provinces={
+        'prov':states
+    }
+
     if contenido==None and usuario==None and desde==None and hasta==None:
-        return render(request,'blog/practise.html',)
+        return render(request,'blog/data_extraction.html',provinces)
     
     elif prefijo != '' and usuario == '' and desde == '' and hasta == '':
         obj = Post.objects.filter(estado__contains=prefijo)
         context = {
             'encontrar': obj,
+            'prov': states,
         }
-        return render(request,'blog/practise.html', context)
+        return render(request,'blog/data_extraction.html', context)
 
     #cuando solo se llena el contenido
     elif contenido != '' and usuario == '' and desde == '' and hasta == '':
         obj = Post.objects.filter(content__contains=contenido)
         context = {
             'encontrar': obj,
+            'prov': states,
         }
-        return render(request,'blog/practise.html', context)
+        return render(request,'blog/data_extraction.html', context)
 
     #cuando se llenan el contenido y las fechas unicamente
     elif contenido != '' and usuario == '' and desde != '' and hasta != '':
         obj = Post.objects.filter(content__contains=contenido, date_posted__range=[desde, hasta],)
         context = {
             'encontrar': obj,
+            'prov': states,
         }
-        return render(request,'blog/practise.html', context) 
+        return render(request,'blog/data_extraction.html', context) 
+    
+    #cuando se llenan las fechas unicamente
+    elif contenido == '' and usuario == '' and desde != '' and hasta != '':
+        obj = Post.objects.filter(date_posted__range=[desde, hasta],)
+        context = {
+            'encontrar': obj,
+            'prov': states,
+        }
+        return render(request,'blog/data_extraction.html', context) 
 
     #cuando se llenan el contenido y el usuario unicamente
     elif contenido != '' and usuario != '' and desde == '' and hasta == '':
         obj = Post.objects.filter(content__contains=contenido, author__username__icontains=usuario,)
         context = {
             'encontrar': obj,
+            'prov': states,
         }
-        return render(request,'blog/practise.html', context)        
+        return render(request,'blog/data_extraction.html', context)        
         
     #cuando se llenan todos los campos
     elif contenido != '' and usuario != '' and desde != '' and hasta != '':
         obj = Post.objects.filter(content__contains=contenido, author__username__icontains=usuario, date_posted__range=[desde, hasta],)
         context = {
             'encontrar': obj,
+            'prov': states,
         }
-        return render(request,'blog/practise.html', context)
+        return render(request,'blog/data_extraction.html', context)
     
     #cuando se llena el solo el campo usuario
     elif contenido == '' and usuario != '' and desde == '' and hasta == '':
         obj = Post.objects.filter(author__username__icontains=usuario,)
         context = {
             'encontrar': obj,
+            'prov': states,
         }
-        return render(request,'blog/practise.html', context)
+        return render(request,'blog/data_extraction.html', context)
         
     else:
         nada = 'Ingrese algún caractér en el cuadro de busquedas'
         also_nada = {
             'fnd': nada,
+            'prov': states,
         }
-        return render(request,'blog/practise.html', also_nada)
+        return render(request,'blog/data_extraction.html', also_nada)
 
 #fin de busqueda de posts ==================================================================================<<
 

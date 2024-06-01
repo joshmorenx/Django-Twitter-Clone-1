@@ -1,104 +1,63 @@
+body{
+    margin: 0 auto;
+    behavior: smooth;
+}
 *{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-body{
-    margin:0;
-    background-color: rgb(255, 240, 240);
+@media screen and (max-width: 320px) {
+    
 }
-header{
-    display:flex;
-    justify-content:space-between;
+#topnav p{
+    display:inline-flex;
+    font-size: 150%;
+    margin: 0;
 }
-#nav {
-    background-color: rgb(219, 163, 59);
-    margin-bottom: 2%;
-    padding: 0;
-    overflow: hidden;
+#topnav div{
+    display:inline-flex;
+    font-size: 120%;
+    margin: 0 auto;
 }
-
-#nav{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-evenly;
-}
-
-a{
-    color: white;
+div#middle{
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
 }
-  
-a:hover {
-    background-color: #111;
-}
-#busqueda{
-    display: inline-flex;
-    margin-left: 1rem;
-    flex-direction: row;
-    align-items: baseline;
-}
-
-#busqueda-btn{
-    display:flex;
-}
-
-#filtrar:hover{
-    color: white;
-    background-color: black;
-}
-
-#fecha-inicial, #fecha-final{
-    width: 30%;
-}
-
-#fecha-inicial, #fecha-final, .fecha-label{
-    display:inline;
-}
-#searching-2{
+div#right{
     float: right;
 }
-#searching{
-    margin-left: 5px;
-    margin-right: 5px;
+
+#topnav{
+    background: rgb(0,212,255);
+    background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(0,255,190,1) 33%, rgba(214,164,23,1) 100%);
 }
-#selector{
-    width: 100%;
+div#divver>a{
+    margin-left:12px;
+    margin-right:12px;
+    color: azure;
 }
-header{
-    text-align: center;
+div#divver>a:link,:active{
+    text-decoration: solid;
 }
-#arrows-examples div {
-    margin: 0 0 15px 0;
+div#divver>a:hover{
+    background-color: azure;
+    color: black;
 }
-.arrow-up {
-    width: 0px;
-    height: 0px;
-    margin-left:10%;
-    border-left: 25px solid transparent;
-    border-right: 25px solid transparent;
-    border-bottom: 25px solid rgb(184, 136, 48);
+#divver{
+    background-color: black ;
+}/* */
+.wrapped-content{
+    display: none;
 }
-*, :after, :before {
-    box-sizing: border-box;
+.wrapped-content>input{
+    height:2rem;
 }
-user agent stylesheet
-div {
-      display: block;
-}
-.popup-filter{
-    background-color:rgb(184, 136, 48);
-    text-align:center;
-    padding:2%;
-    border-radius:10px;
-    box-shadow: 0px 0px 50px rgb(0, 0, 0);
-}
-.labeler{
-    display:inline-flex;
-    width:100%;
-    border:1px solid black;
-    padding:1%;
+.wrapped-content{
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    border-radius: 5px;
+    right:0%;
+    /* top:16%; */
+    width:35%;
 }
 .labeler>input{
     width:100%;
@@ -116,15 +75,183 @@ div {
     color:#ffffff;
     background-color:#000000;
 }
-.wrapped-content>input{
-    height:2rem;
+.labeler{
+    display:inline-flex;
+    width:100%;
+    border:1px solid black;
+    padding:1%;
 }
-.wrapped-content{
+.popup-filter{
+    background-color:rgb(184, 136, 48);
+    text-align:center;
+    padding:2%;
+    border-radius:10px;
+    box-shadow: 0px 0px 50px rgb(0, 0, 0);
+}
+.arrow-up {
+    width: 0px;
+    height: 0px;
+    margin-left:40%;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 25px solid rgb(184, 136, 48);
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+      display: block;
+}
+header{
+    text-align: center;
+}
+#arrows-examples div {
+    margin: 0 0 15px 0;
+}
+#nav {
+    background-color: rgb(219, 163, 59);
+    margin-bottom: 2%;
+    padding: 0;
+    overflow: hidden;
+}
+
+#nav{
+    /* display: block; */
     display: none;
-    position: absolute;
-    z-index: 1000;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-evenly;
+}
+
+/* a{
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+} */
+  
+a:hover {
+    background-color: #111;
+}
+#busqueda{
+    display: inline-flex;
+    margin-left: 1rem;
+    flex-direction: row;
+    align-items: baseline;
+    float: right;
+}
+
+#busqueda-btn{
+    display:flex;
+}
+
+#filtrar:hover{
+    color: white;
+    background-color: black;
+}
+/*oculta el mapa*/
+#form1{
+    display:initial;
+}
+/*oculta el mapa*/
+#contenido_principal,#contenido_principal>*{
+    border:5px solid black;
     border-radius: 5px;
-    right:0%;
-    top:16%;
-    width:35%;
+}
+#contenido_principal>h1,#buscadore{
+    text-align: center;   
+}
+#buscadore{
+    width: 85%;
+    margin: auto;
+}
+#sre{
+    width: 35%;
+    height: 5%;
+    border-radius: 5rem;
+}
+#go{
+    height: 5%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#mopt{
+    color: steelblue;
+    cursor: pointer;
+    /* border: 1px solid; */
+    margin: auto;
+    width: 15%;
+}
+#mopt:hover{
+    text-decoration: underline;
+}
+#post_sys{
+    display: none;
+    margin: auto;
+}
+#lopt{
+    color: steelblue;
+    cursor: pointer;
+    margin: auto;
+    width: 15%;    
+}
+#lopt:hover{
+    text-decoration: underline;
+}
+/* #from,#to{
+    display: inline-block;
+} */
+#u_search{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+#usr{
+    width: 35%;
+    height: 5%;
+    border-radius: 5rem;
+}
+#dates{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+#go_more{
+    height: 5%;
+    width: 35%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#states-div{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+#states{
+    display: none;
+}
+.footer {
+    display: inline-flex;
+    background: linear-gradient(0.25turn, #5379f5, #451f9c) !important;
+    position: fixed;
+    height: 50px;
+    background-color: red;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}
+#res_table {
+    /* overflow-y:scroll; */
+    /* display: flex; */
+    /* height: 350px; */
+    width:85%;
+    margin:auto;
+    border: 2px solid black;
+}
+.content_list_states{
+    display: none;
+}
+div#providence{
+    margin: auto;
+    border:1px solid black;
+    width: 20%;
 }

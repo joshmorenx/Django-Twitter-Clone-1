@@ -165,35 +165,31 @@
                     <a
                             style="color: rgba(255, 255, 255, 0.5) !important;"
                             href="{% url 'post-detail' post.id %}">
-                        <p id="curitiba" class="mb-4">
-                            <script>
-                                var oopdate = '{{ post.content | urlize }}'
-                                var arreglo = []
-                                arreglo = oopdate.split(' ')
-                                arrobatizer = () => {
-                                    for(i=0;i<arreglo.length;i++){
-                                        if(arreglo[i].includes('@')){
-                                            arreglo[i] = arreglo[i].replace(arreglo[i],'<a href="user/'+arreglo[i].replace('\@','')+'">'+arreglo[i]+'</a>')
-                                            // document.write('<a href="user/'+item.replace('\@','')+'">'+item+'</a>')
-                                        }
-                                    }
-                                    return document.write(arreglo.join(' '))
-                                }
-                                
-                                arrobatizer()
-                                
-                                // arrobatizer = () => {
-                                //     if(oopdate.includes('@')){
-                                //         document.write(oopdate)
-                                //     }
-                                // }
-                                // arrobatizer()
-                            </script>
-                            
-                            <!-- {{ post.content | urlize }} -->
-                        </p>
+                        <p id="curitiba" class="mb-4">{{ post.content | urlize }}</p>
+                        
                     </a>
-                    
+                    <script>
+                        var posts = document.querySelectorAll('#curitiba')
+                        var hashes = []
+                        
+                        getHashTags=()=>{
+                            for (var i = 0; i < posts.length; i++) {
+                                var post = posts[i]
+                                var text = post.innerText
+                                var hashTags = text.match(/#[a-z\_]+/gi)
+                                if (hashTags) {
+                                    for (var j = 0; j < hashTags.length; j++) {
+                                        var hashTag = hashTags[j];
+                                        var link = '<a href="/hashtags/'+hashTag+'"'+' >' + hashTag + "</a>";
+                                        text = text.replace(hashTag, link);
+                                    }
+                                    post.innerHTML = text;
+                                }
+                            }
+                        }
+                        getHashTags()
+                        </script>
+
                     {% if post.header_image %}
                         <img src="{{ post.header_image.url }}" width="100%z" height="100%"></img>
                     {% endif %}

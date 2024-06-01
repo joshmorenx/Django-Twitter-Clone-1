@@ -1,0 +1,23 @@
+{% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="." method="POST">{% csrf_token %} 
+        <label for="srch">busqueda</label>
+        <input name="busqueda" id="busqueda" type="text"/>
+        <input type="submit" value="Search" />
+    </form>
+
+    <div>
+        {% for hash in encontrar %}
+            <p>{{ encontrar }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% endblock %}
