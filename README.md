@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Django Twitter Clone modified by Joshua Emmanuel Aranda Moreno
 
 This is a fork, modified by Joshua Emmanuel Aranda Moreno,
@@ -54,4 +53,3 @@ SOFTWARE.
 # Django Twitter Clone modded by Joshmorenx
 
 Fully functional Django App that looks nice
->>>>>>> f498ace01ec768b87ce6b1431f143f7bd5e52bc8
